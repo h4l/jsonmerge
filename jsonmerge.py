@@ -98,8 +98,8 @@ def json_merge(a, b):
 
     # At most one of a, b can be MISSING
     if b is MISSING:
+        assert a is not MISSING
         return a
-    assert b is not MISSING
     return b
 
 
