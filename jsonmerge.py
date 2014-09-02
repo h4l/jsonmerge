@@ -72,7 +72,12 @@ MISSING = object()
 
 
 def json_merge_all(json_objects):
-    return reduce(json_merge, json_objects, MISSING)
+    merged = reduce(json_merge, json_objects, MISSING)
+    # If json_objects is empty then reduce will return MISSING. (json_merge()
+    # never returns missing.)
+    if merged == MISSING:
+        raise ValueError("json_objects was empty")
+    return merged
 
 
 def json_merge(a, b):
